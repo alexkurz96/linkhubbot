@@ -1,5 +1,7 @@
 const urlRegex = require('url-regex')
 
+const selectTags = require('../handlers/selectTags')
+
 const { parseLink } = require('./openGraph')
 const { getTags } = require('./tags')
 
@@ -14,10 +16,11 @@ const separateLink = content => {
   return { url: urls.length > 0 ? urls[0] : undefined, text }
 }
 
-const parseMessage = async message => {
-  const LinkAndText = separateLink(message)
+const parseMessage = async messageText => {
+  const LinkAndText = separateLink(messageText)
   if (LinkAndText.url) {
     openGraph = await parseLink(LinkAndText.url)
+    const allTags = await selectTags()
     const tags = getTags(
       openGraph.error
         ? LinkAndText.text
@@ -25,7 +28,8 @@ const parseMessage = async message => {
           ' ' +
           openGraph.data.ogTitle +
           ' ' +
-          openGraph.data.ogDescription
+          openGraph.data.ogDescription,
+      allTags
     )
     if (openGraph.error) {
       return {

@@ -135,7 +135,7 @@ slimbot.on('message', async message => {
               )
               break
             }
-            const loginInUse = !await checkLogin(message.text)
+            const loginInUse = !(await checkLogin(message.text))
             console.log('LOGIN IN USE: ', loginInUse)
             if (loginInUse) {
               slimbot.sendMessage(

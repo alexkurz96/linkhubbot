@@ -1,12 +1,12 @@
 const DB = require('../db')
 const QUERY = require('../sql').tag.select
 
-const selectTags = async count => {
+const selectTags = async (count = 1000) => {
   try {
-    const result = await DB.any(QUERY, { count })
-    if (result === undefined) console.log('\x1b[31m', 'selectTags error', '\x1b[37m', ' ', 'no tags')
-    console.log('\x1b[31m', 'selectTags', '\x1b[37m', ' ', result)
-    return result
+    return DB.any(QUERY, { count })
+    // if (result === undefined)
+    //   console.log('\x1b[31m', 'selectTags error', '\x1b[37m', ' ', 'no tags')
+    // console.log('\x1b[31m', 'selectTags', '\x1b[37m', ' ', result)
   } catch (err) {
     console.log('\x1b[31m', 'selectTags error', '\x1b[37m', ' ', err)
     return []

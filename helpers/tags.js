@@ -4,13 +4,15 @@ const tagNames = require('./tagNames.json')
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index
 
-const getTagsFromArray = tokens =>
-  tokens
-    .map(s => s.toLowerCase().replace('-', '_'))
-    .map(name => tagNames[name])
+const getTagsFromArray = (words, allTags) =>
+  words
+    .map(word => word.toLowerCase().replace('-', '_'))
+    .map(word => allTags.find(({ name }) => name === word))
     .filter(s => !!s)
+    .map(el => el.id)
     .filter(onlyUnique)
 
-const getTags = content => getTagsFromArray(content.split(' '))
+const getTags = (content, allTags) =>
+  getTagsFromArray(content.split(' '), allTags)
 
 module.exports = { getTags }
