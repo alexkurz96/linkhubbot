@@ -1,11 +1,9 @@
 const urlRegex = require('url-regex')
 
-const selectTags = require('../handlers/selectTags')
+const { selectTagsWord } = require('../handlers/selectTags')
 
 const { parseLink } = require('./openGraph')
 const { getTags } = require('./tags')
-
-const content1 = `https://medium.com/@vncnt/the-easy-way-to-stop-using-sketch-and-switch-to-figma-578e02f55443`
 
 const separateLink = content => {
   const urls = content.match(urlRegex({ strict: false }))
@@ -20,7 +18,7 @@ const parseMessage = async messageText => {
   const LinkAndText = separateLink(messageText)
   if (LinkAndText.url) {
     openGraph = await parseLink(LinkAndText.url)
-    const allTags = await selectTags()
+    const allWords = await selectTagsWord()
     const tags = getTags(
       openGraph.error
         ? LinkAndText.text
@@ -29,7 +27,7 @@ const parseMessage = async messageText => {
           openGraph.data.ogTitle +
           ' ' +
           openGraph.data.ogDescription,
-      allTags
+      allWords
     )
     if (openGraph.error) {
       return {

@@ -29,7 +29,10 @@ module.exports = {
   tag: {
     select: sql('./tag/select.sql')
   },
+  word_n_tag: {
+    select: sql('./word_n_tag/select.sql')
+  },
   person: {
     select: sql('./person/select.sql')
-  },
+  }
 }

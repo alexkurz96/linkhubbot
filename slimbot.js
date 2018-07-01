@@ -1,7 +1,7 @@
 const Slimbot = require('slimbot')
 const selectLinks = require('./handlers/selectLinks')
 const linkInsert = require('./handlers/linkInsert')
-const selectTags = require('./handlers/selectTags')
+const { selectTags } = require('./handlers/selectTags')
 const selectPersons = require('./handlers/selectPersons')
 const isUser = require('./handlers/isUser')
 const currentPersonId = require('./handlers/currentPersonId')
@@ -106,6 +106,7 @@ slimbot.on('message', async message => {
         )
         slimbot.sendMessage(message.chat.id, `Your link was added!`, params)
       } catch (err) {
+        console.err('parseMessage', err)
         slimbot.sendMessage(message.chat.id, `It's not a link`, params)
       }
     } else {

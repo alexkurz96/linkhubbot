@@ -1,19 +1,26 @@
 const DB = require('../db')
 const QUERY = require('../sql').tag.select
+const QUERY_WORD = require('../sql').word_n_tag.select
 
 const selectTags = async (count = 1000) => {
   try {
     return DB.any(QUERY, { count })
-    // if (result === undefined)
-    //   console.log('\x1b[31m', 'selectTags error', '\x1b[37m', ' ', 'no tags')
-    // console.log('\x1b[31m', 'selectTags', '\x1b[37m', ' ', result)
   } catch (err) {
     console.log('\x1b[31m', 'selectTags error', '\x1b[37m', ' ', err)
     return []
   }
 }
 
-module.exports = selectTags
+const selectTagsWord = async () => {
+  try {
+    return DB.any(QUERY_WORD)
+  } catch (err) {
+    console.log('\x1b[31m', 'selectTags error', '\x1b[37m', ' ', err)
+    return []
+  }
+}
+
+module.exports = { selectTags, selectTagsWord }
 
 // const params = {
 //   parse_mode: 'markdown',

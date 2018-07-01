@@ -10,15 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "get-urls": "^7.2.0",
-    "open-graph-scraper": "^3.3.0",
-    "pg-promise": "^7.3.2",
-    "slimbot": "^0.7.13",
+    "open-graph-scraper": "^3.5.0",
+    "pg-promise": "^8.4.4",
+    "slimbot": "^0.7.16",
     "url-regex": "^4.1.1"
   },
   "devDependencies": {
-    "cross-env": "^5.1.1",
+    "cross-env": "^5.2.0",
     "faker": "^4.1.0",
     "gaussian": "^1.1.0",
-    "json2csv": "^3.11.5"
+    "json2csv": "^4.1.5"
   }
 }

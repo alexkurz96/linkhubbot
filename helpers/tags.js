@@ -1,11 +1,14 @@
-// const onlyUnique = (value, index, self) => self.indexOf(value) === index
+const onlyUnique = (value, index, self) => self.indexOf(value) === index
+const searchTag = content => ({ word, tag_id }) =>
+  content.search(word) !== -1 ? tag_id : undefined
 
-const getTagsFromArray = (content, allTags) =>
-  allTags
-    .map(({ name, id }) => (content.search(name) !== -1 ? id : undefined))
+const getTagsFromArray = (content, allWords) =>
+  allWords
+    .map(searchTag(content))
     .filter(s => !!s)
+    .filter(onlyUnique)
 
-const getTags = (content, allTags) =>
-  getTagsFromArray(content.toLowerCase(), allTags)
+const getTags = (content, allWords) =>
+  getTagsFromArray(content.toLowerCase(), allWords)
 
 module.exports = { getTags }
