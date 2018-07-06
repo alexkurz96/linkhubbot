@@ -29,7 +29,6 @@ const onMessage = async (slimbot, message) => {
 
 let chain = []
 let data = {}
-
 // Register listeners
 slimbot.on('message', async message => {
   console.log(message.entities)
@@ -175,6 +174,9 @@ slimbot.on('message', async message => {
                 data.password,
                 id
               )
+              data.login = undefined
+              data.password = undefined
+              chain = []
               slimbot.sendMessage(message.chat.id, `Hi ${first_name}`, params)
               break
             default:
