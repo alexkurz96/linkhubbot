@@ -3,5 +3,5 @@ select
 from
 	link
 order by
-	id 
+	id DESC
 limit ${count}
